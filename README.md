@@ -4,7 +4,10 @@
 매수 타점 계산은 클라이언트단(Javascript)에서 수행하고, 서버에는(Django, Mysql) 설정값들을 보관합니다.   
 설정값을 보관하기 위해 네이버 로그인 API를 사용하였습니다.   
 
-Link : https://ehdrnsep.cafe24.com/stockcenterline
+Link : https://ehdrnsep.cafe24.com/stockcenterline   
+
+ 현재 저장소에는 보안에 관련된 부분은 지우고 최종본만 업로드하였고, 실제 개발시 사용한 private 저장소가 따로 존재합니다.   
+ 향후 공개할 프로젝트의 보안에 중요한 키값은 따로 관리를 해야겠습니다.   
 
 ***
 
