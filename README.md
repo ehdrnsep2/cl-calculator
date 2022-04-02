@@ -106,7 +106,7 @@ class Setting(models.Model):
 
  
  
- - 그 다음은 Nginx + Gunicorn 조합으로 웹서버를 구축했습니다. Nginx와 Gunicorn 통신은 성능을 위해 http->socekt으로 변경하였습니다. 파이참에서 편하게 runserver로 하다가 막상 배포하려고 하니 삽질 많이 했습니다. python manage.py collectstatic으로 static 폴더 복사해주고, Nginx에서 static 폴더 경로 잡아주는데 시간을 많이 잡아먹었습니다. Nginx autoindex on....으....윽
+ - 그 다음은 Nginx + Gunicorn 조합으로 웹서버를 구축했습니다. Nginx와 Gunicorn 통신은 성능을 위해 http->socket으로 변경하였습니다. 파이참에서 편하게 개발 하다가 막상 배포하려고 하니 삽질 많이 했습니다. python manage.py collectstatic으로 static 폴더 복사해주고, Nginx에서 static 폴더 경로 잡아주는데 시간을 많이 잡아먹었습니다. Nginx autoindex on....으....윽
 ![image](https://user-images.githubusercontent.com/66984636/161368670-0abb017a-29e0-4f71-83e1-eb9f234e46cc.png)
 
 
