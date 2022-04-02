@@ -102,15 +102,15 @@ class Setting(models.Model):
  - 
  ![cafe24](https://user-images.githubusercontent.com/66984636/161368147-36507752-0b1c-4fdf-befa-8d5472e6e892.png)
 
- - os는 Ubuntu 20.04로 설치하였습니다. Git 설치해서 master 브랜치로 배포를 진행하였습니다. 콘솔에 명령어 치다보니 파이참의 감사함을 느꼈네요.
- - 우선 웹서버는 Django의 디버깅용인 runserver를 이용해서 구동했습니다. 외부에서 웹서버에 접근이 안되서 방화벽에서 8000포트 뚫어주려고 했더니, 방화벽 설정이 아예 안되더라구요. cafe24에 문의 남기고 1시간 후에 잘 해결해주었습니다. 
+ - os는 Ubuntu 20.04로 설치하였습니다. Git 설치해서 master 브랜치로 배포를 진행하였습니다. 콘솔에 명령어 치다보니 파이참의 감사함을 느꼈네요. Mysql 설치하고 DB 만들고 Django의 migration 기능에 매우 만족하며 신나게 진행했습니다.
+ - 우선 웹서버는 Django의 디버깅용인 runserver를 이용해서 구동했습니다. 외부에서 웹서버에 접근이 안되서 방화벽에서 8000포트 뚫어주려고 했더니, 방화벽 설정이 아예 안되더라구요. cafe24에 문의 남기고 1시간 후에 cafe24 담당자분께서 잘 해결해주셨습니다. 
  
  
  ![image](https://user-images.githubusercontent.com/66984636/161368592-7a1a3466-4f4c-4268-9984-f7b54b0b5a5a.png)
 
  
  
- - 그 다음은 Nginx + Gunicorn 조합으로 웹서버를 구축했습니다. Nginx와 Gunicorn 통신은 성능을 위해 http->socket으로 변경하였습니다. 파이참에서 편하게 개발 하다가 막상 배포하려고 하니 삽질 많이 했습니다. python manage.py collectstatic으로 static 폴더 복사해주고, Nginx에서 static 폴더 경로 잡아주는데 시간을 많이 잡아먹었습니다. Nginx autoindex on....으....윽   
+ - 그 다음은 Nginx + Gunicorn 조합으로 웹서버를 구축했습니다. Nginx와 Gunicorn 통신은 성능을 위해 http->socket으로 변경하였습니다. 파이참에서 편하게 개발 하다가 막상 배포하려고 하니 삽질 많이 했습니다. python manage.py collectstatic으로 static 폴더 복사해주고, Nginx에서 static 폴더 경로 잡아주는데 시간을 많이 잡아먹었습니다. 별것도 아닌거에 시간 낭비하는... 오랜만에 느끼는 깊은 빡침에 잠이 오질 않더라구요.........^^......Nginx autoindex on....으....윽   
  
 ![image](https://user-images.githubusercontent.com/66984636/161368670-0abb017a-29e0-4f71-83e1-eb9f234e46cc.png)
 
