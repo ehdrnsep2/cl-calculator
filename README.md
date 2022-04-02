@@ -98,7 +98,8 @@ class Setting(models.Model):
 
 ## 서버 구축 Cafe24, Ubuntu, Python, Django, Nginx, Gunicorn, Mysql, Git, Https
  - 리누스님께서 AWS와 Nginx를 추천해주셨습니다. 우선 처음하는 배포이고, 개인 사비로 서버를 운영하기 때문에 한국의 저렴한 cafe24로 진행했습니다. 차후에는 AWS로 꼭 진행해보겠습니다.^^
- - cafe24의 일반형으로 설치비 22,000원과 매월 5,500원으로 리눅스 가상서버 호스팅을 진행했습니다.
+ - cafe24의 일반형으로 설치비 22,000원과 매월 5,500원으로 리눅스 가상서버 호스팅을 진행했습니다.   
+ - 
  ![cafe24](https://user-images.githubusercontent.com/66984636/161368147-36507752-0b1c-4fdf-befa-8d5472e6e892.png)
 
  - os는 Ubuntu 20.04로 설치하였습니다. Git 설치해서 master 브랜치로 배포를 진행하였습니다. 콘솔에 명령어 치다보니 파이참의 감사함을 느꼈네요.
@@ -109,7 +110,8 @@ class Setting(models.Model):
 
  
  
- - 그 다음은 Nginx + Gunicorn 조합으로 웹서버를 구축했습니다. Nginx와 Gunicorn 통신은 성능을 위해 http->socket으로 변경하였습니다. 파이참에서 편하게 개발 하다가 막상 배포하려고 하니 삽질 많이 했습니다. python manage.py collectstatic으로 static 폴더 복사해주고, Nginx에서 static 폴더 경로 잡아주는데 시간을 많이 잡아먹었습니다. Nginx autoindex on....으....윽
+ - 그 다음은 Nginx + Gunicorn 조합으로 웹서버를 구축했습니다. Nginx와 Gunicorn 통신은 성능을 위해 http->socket으로 변경하였습니다. 파이참에서 편하게 개발 하다가 막상 배포하려고 하니 삽질 많이 했습니다. python manage.py collectstatic으로 static 폴더 복사해주고, Nginx에서 static 폴더 경로 잡아주는데 시간을 많이 잡아먹었습니다. Nginx autoindex on....으....윽   
+ 
 ![image](https://user-images.githubusercontent.com/66984636/161368670-0abb017a-29e0-4f71-83e1-eb9f234e46cc.png)
 
 
