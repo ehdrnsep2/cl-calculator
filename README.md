@@ -33,7 +33,7 @@ Link : https://ehdrnsep.cafe24.com/stockcenterline
 ***
 
 ##  백엔드 개발 Django, Python, Mysql
- - 화면을 만들고, DB 모델링하고 연동하려니 후회가 들었습니다. Django의 ModelForm을 활용하지 못해서 아쉬웠고, 설정값 저장을 POST로 직접 처리했는데 이게 맞나 싶었습니다.
+ - Django 학습인만큼 화면을 만들기 전에 DB 모델링부터 해서 Form을 이용했으면 좋았을 것 같습니다. 윈도우 개발할때처럼 화면부터 만들었더니 Form을 이용해 연동하려면 제가 원하는 디자인이 나오게 하는데 쉽지 않을 것 같더라구요. Django의 ModelForm을 활용하지 못해서 아쉬웠고, 설정값 저장을 POST로 직접 처리했는데 이런 설계가 맞나 싶었습니다.   
 ```python
 class CenterLineCalc(generic.View):
     template_name = 'stockCenterLine/clcalc.html'
