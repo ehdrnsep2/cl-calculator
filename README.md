@@ -54,7 +54,7 @@ class CenterLineCalc(generic.View):
         unit = int(request.POST['unit'])
         ...
 ```
- - 네이버 로그인 API를 참조한 블로그에서 Mixin 이란 네이밍으로 설계한 클래스를 분석했습니다. Django에서는 상속을 Mixin이라고 부르는 것 같았고, Django 학습 2일의 한계를 느꼈습니다.
+ - 네이버 로그인 API를 참조한 블로그에서 Mixin 이란 네이밍으로 설계한 클래스를 분석했습니다. Django에서는 상속을 이용한 설계를 Mixin이라고 부르는 것 같았고, 처음보는 설계 방식에 Django 학습 2일의 한계를 느꼈습니다.
  - 네이버 로그인 요청 후 Callback이 오면 django.contrib.auth.login 함수를 이용해 로그인 처리를 하고, session을 설정하였습니다. 로그인 처리와 세션 관리가 굉장히 편했습니다.
  - DB에는 User를 Foreignkey로 설정값들을 보관하였습니다.
 ```python
