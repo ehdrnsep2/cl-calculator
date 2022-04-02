@@ -93,7 +93,7 @@ class Setting(models.Model):
 
 ***
 
-## 배포 서버 구축 Cafe24, Ubuntu, Python, Django, Nginx, Gunicorn, Mysql, Git, Https
+## 서버 구축 Cafe24, Ubuntu, Python, Django, Nginx, Gunicorn, Mysql, Git, Https
  - 리누스님께서 AWS와 Nginx를 추천해주셨습니다. 우선 처음하는 배포이고, 개인 사비로 서버를 운영하기 때문에 한국의 저렴한 cafe24로 진행했습니다. 차후에는 AWS로 꼭 진행해보겠습니다.^^
  - cafe24의 일반형으로 설치비 22,000원과 매월 5,500원으로 리눅스 가상서버 호스팅을 진행했습니다.
  ![cafe24](https://user-images.githubusercontent.com/66984636/161368147-36507752-0b1c-4fdf-befa-8d5472e6e892.png)
