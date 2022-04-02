@@ -30,6 +30,7 @@ Link : https://ehdrnsep.cafe24.com/stockcenterline
  ```
  - Javascript는 무난하게 다룬거 같고, JQuery에 대한 학습이 필요하다 느꼈습니다.
 
+***
 
 ## 서버 개발 Django, Python, Mysql
  - 화면을 만들고, DB 모델링하고 연동하려니 후회가 들었습니다. Django의 ModelForm을 활용하지 못해서 아쉬웠고, 설정값 저장을 POST로 직접 처리했는데 이게 맞나 싶었습니다.
@@ -90,10 +91,33 @@ class Setting(models.Model):
 {% endif %}
 ```
 
-## 배포 cafe24, Ubuntu
+***
+
+## 배포 서버 구축 Cafe24, Ubuntu, Python, Django, Nginx, Gunicorn, Mysql, Git, Https
+ - 리누스님께서 AWS와 Nginx를 추천해주셨습니다. 우선 처음하는 배포이고, 개인 사비로 서버를 운영하기 때문에 한국의 저렴한 cafe24로 진행했습니다. 차후에는 AWS로 꼭 진행해보겠습니다.^^
+ - cafe24의 일반형으로 설치비 22,000원과 매월 5,500원으로 리눅스 가상서버 호스팅을 진행했습니다.
+ ![cafe24](https://user-images.githubusercontent.com/66984636/161368147-36507752-0b1c-4fdf-befa-8d5472e6e892.png)
+
+ - os는 Ubuntu 20.04로 설치하였습니다. Git 설치해서 master 브랜치로 배포를 진행하였습니다. 콘솔에 명령어 치다보니 파이참의 감사함을 느꼈네요.
+ - 우선 웹서버는 Django의 디버깅용인 runserver를 이용해서 구동했습니다. 외부에서 웹서버에 접근이 안되서 방화벽에서 8000포트 뚫어주려고 했더니, 방화벽 설정이 아예 안되더라구요. cafe24에 문의 남기고 1시간 후에 잘 해결해주었습니다. 
  
+ 
+ ![image](https://user-images.githubusercontent.com/66984636/161368592-7a1a3466-4f4c-4268-9984-f7b54b0b5a5a.png)
+
+ 
+ 
+ - 그 다음은 Nginx + Gunicorn 조합으로 웹서버를 구축했습니다. Nginx와 Gunicorn 통신은 성능을 위해 http->socekt으로 변경하였습니다. 파이참에서 편하게 runserver로 하다가 막상 배포하려고 하니 삽질 많이 했습니다. python manage.py collectstatic으로 static 폴더 복사해주고, Nginx에서 static 폴더 경로 잡아주는데 시간을 많이 잡아먹었습니다. Nginx autoindex on....으....윽
+![image](https://user-images.githubusercontent.com/66984636/161368670-0abb017a-29e0-4f71-83e1-eb9f234e46cc.png)
+
+
+ - 웹서버 구축도 다했으니, 이제 끝난줄알았는데.......클립보드 복사 기능이 동작을 안합니다. navigator.clipboard를 사용했는데, http에서는 보안상 사용 불가하더라구요. 클립보드 기능 때문에 https까지 구축했습니다. Let's Encrypt 보안인증서를 사용했고, certbot의 도움으로 비교적 쉽게 구축한 것 같습니다.
+ - https로 구축하니 클립보드가 잘 동작해서, 이제 진짜 끝이라고 생각하는 순간 설마하고 IE로 접속해보았습니다. 하지만..결국 아래와 같이 미지원으로 결정했습니다.
+
  - 지원 익스플로러 : Edge, Chrome
  - 미지원 익스플로러 : Internet Explorer (개발 다 하고 IE로 열었더니 Javscript ES6 미지원때문에 멘붕오더라구요^^ 프론트앤드 개발자분들 존경..)
 
-프론트앤드 : html, bootstrap4, javascript, jquery
-백엔드 : django, 
+ - 현재는 네이버 로그인 API를 사용하기 위해 네이버측에 검수요청을 한 상태로써, 네이버 로그인은 저만 가능한 상태입니다.
+ - 주저리 생각나는대로 적어봤는데, 여기까지 읽어주셔서 감사합니다..ㅠ.ㅠ
+ - 1주일의 기간동안 느낀점은 아..공부 열심히 해야겠다였습니다. ^^*
+
+
