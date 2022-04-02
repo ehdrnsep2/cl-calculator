@@ -1,0 +1,53 @@
+{% extends 'stockCenterLine/index.html' %}
+
+{% load static %}
+
+{% block title %}Login page{% endblock %}
+
+{% block content %}
+    <form action="." method="post">
+        {% csrf_token %}
+        {#    <div class="col d-flex justify-content-center">#}
+        <div class="row justify-content-center align-self-center">
+            <div class="card my-5">
+                <div class="card-body">
+                    <h4 class="card-title my-3">소셜 로그인</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">설정 정보를 저장하려면 가입이 필요합니다.</h6>
+
+                    <div class="row justify-content-center align-self-center my-3">
+                        <a href="javascript:naverLogin();" class="card-link">
+                            <img src="{% static 'stockCenterLine/images/login_naver.png' %}" height="50">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+
+        function buildQuery(params) {
+            return Object.keys(params).map(function (key) {
+                return key + '=' + encodeURIComponent(params[key])
+            }).join('&')
+        }
+
+        function buildUrl(baseUrl, queries) {
+            return baseUrl + '?' + buildQuery(queries)
+        }
+
+        function naverLogin() { // 네이버 로그인
+            params = {
+                response_type: 'code',
+                client_id: 'tvU2v4TLXOt4bbdpYRFz',
+                redirect_uri: location.origin + '/stockcenterline/login/social/naver/callback/',
+                state: document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+            url = buildUrl('https://nid.naver.com/oauth2.0/authorize', params)
+            location.replace(url)
+        }
+
+    </script>
+
+{% endblock %}

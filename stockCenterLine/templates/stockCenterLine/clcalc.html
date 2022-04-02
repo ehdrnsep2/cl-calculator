@@ -1,0 +1,221 @@
+{% extends 'stockCenterLine/index.html' %}
+
+{% block title %}Index page{% endblock %}
+
+{% block content %}
+
+    <div class="text-center mt-5">
+        <div class="page-header">
+            <h1>CL 계산기</h1>
+            <br>
+        </div>
+        <form action="{% url 'stockCenterLine:clcalc' %}" id="frmSetting" method="post">
+            {% csrf_token %}
+            <div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">가중치(%)</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="weight" class="form-control" id="inputWeight"
+                               value="{% if user.is_authenticated %}{{ setting.weight }}{% else %}2.0{% endif %}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">최대값</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="max" class="form-control" id="inputMax"
+                               value="{% if user.is_authenticated %}{{ setting.max_value }}{% else %}10000{% endif %}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">최소값</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="min" class="form-control" id="inputMin"
+                               value="{% if user.is_authenticated %}{{ setting.min_value }}{% else %}5000{% endif %}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">단위</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="unit" class="form-control" id="inputUnit"
+                               value="{% if user.is_authenticated %}{{ setting.unit }}{% else %}10{% endif %}">
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="btnCalc" class="btn btn-primary">계산하기</button>
+            <hr class="my-5">
+            <div class="my-2">
+                <div class="d-flex justify-content-center">
+                    <textarea class="form-control w-50 p-3" rows="7" id="txtResult"></textarea>
+                </div>
+            </div>
+            <div class="my-2">
+                <button type="button" id="btnCopyClipboard" class="btn btn-dark" data-clipboard-action="copy" data-clipboard-target="#txtResult">클립보드 복사</button>
+            </div>
+            </br>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">이격</label>
+                <div class="col-sm-8">
+                    <input readonly="true" type="text" class="form-control" id="resultGap">
+                </div>
+            </div>
+            <div>
+                <table class="table" id="resultTable">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" id="checkAll" onclick="onChangedCheckAll(this);"></th>
+                        <th>구분</th>
+                        <th>가격</th>
+                    </tr>
+                    </thead>
+                    <tbody id="resultTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="my-5">
+                {% if user.is_authenticated %}
+                    <button type="button" id="btnSaveSetting" class="btn btn-success">설정 저장하기</button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        let valueNames = ['빨', '빨반', '주', '주반', '노', '노반', '초', '초반', '파', '파반', '남', '남반', '보', '보반']
+        let checkeStatus = []
+
+        for (let i = 0; i < valueNames.length; i++) {
+            checkeStatus.push(true)
+        }
+
+        let tbMin = document.getElementById('inputMin')
+        let tbMax = document.getElementById('inputMax')
+        let tbUnit = document.getElementById('inputUnit')
+        let tbWeight = document.getElementById('inputWeight')
+        let gapPer = 0
+        let values = []
+
+        initView()
+        initClipboard()
+
+        function initClipboard(){
+            let btnCopyClipboard = document.getElementById('btnCopyClipboard');
+            let clipboard = new ClipboardJS(btnCopyClipboard);
+
+            clipboard.on('success', function (e) {
+                alert('클립보드에 복사를 완료하였습니다.')
+            });
+
+            clipboard.on('error', function (e) {
+                alert('클립보드에 복사를 실패하였습니다.\n직접 복사하세요.')
+            });
+        }
+
+        function initView() {
+            $("#btnSaveSetting").click(function () {
+                $('#frmSetting').submit()
+            });
+
+            $('#frmSetting').submit(function () {
+                $.ajax({
+                    url: $('#frmSetting').attr('action'),
+                    type: 'POST',
+                    data: $('#frmSetting').serialize(),
+                    success: function () {
+                        alert('저장이 완료되었습니다.')
+                    }
+                });
+                return false;
+            });
+            //let colors = ['#ff0000','#ff8c00','#ffff00','#008000','#0000ff','#4b0082','#800080']
+
+            {% if user.is_authenticated %}
+                let selected = [{{ setting.selected | safe }}]
+                //let selectedArray = selected.split(',')
+                if (valueNames.length == selected.length) {
+                    for (let i = 0; i < valueNames.length; i++) {
+                        checkeStatus[i] = selected[i]
+                    }
+                }
+            {% endif %}
+
+            let table = document.getElementById('resultTableBody')
+            for (let i = 0; i < valueNames.length; i++) {
+                //let colorIndex = parseInt(i / 2);
+                //let row = `<tr style=\"background-color:#636464;color:${colors[colorIndex]}\"><td>${valueNames[i]}</td> <td id=${'result' + i}> </td></tr>`
+                let chkName = 'selected' + i
+                let row = `<tr><td><input type='checkbox' name=${chkName} id=${chkName}></td><td>${valueNames[i]}</td> <td id=${'result' + i}> </td></tr>`
+                table.innerHTML += row
+            }
+
+            for (let i = 0; i < valueNames.length; i++) {
+                let chkSelected = document.getElementById('selected' + i)
+                chkSelected.checked = checkeStatus[i]
+            }
+
+            onCalc()
+
+            document.getElementById('btnCalc').addEventListener('click', onCalc);
+            //document.getElementById('btnCopyClipboard').addEventListener('click', onCopyClipboard);
+        }
+
+        function onChangedCheckAll(chkIsAll) {
+            let isChecked = chkIsAll.checked
+            for (let i = 0; i < valueNames.length; i++) {
+                let chkSelected = document.getElementById('selected' + i)
+                chkSelected.checked = isChecked
+            }
+        }
+
+        function onCopyClipboard() {
+            let text = document.getElementById('txtResult').innerText
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    alert('클립보드에 복사를 완료하였습니다.')
+                })
+                .catch(err => {
+                    alert('Something went wrong\t' + err);
+                })
+        }
+
+        function onCalc() {
+            let weight = Number(tbWeight.value)
+            let min = Number(tbMin.value)
+            let max = Number(tbMax.value)
+            let cl = (max + min) / 2
+            let unit = Number(tbUnit.value)
+            let iterWeight = 0.0
+            let len = valueNames.length
+
+            let resultTxts = []
+            values = []
+            for (let i = 0; i < len; i++) {
+                let v = Math.round((max - (((max - cl) / 5) * (weight + iterWeight))) / unit) * unit
+                values.push(v)
+                let vName = 'result' + i
+                document.getElementById(vName).innerText = v.toString()
+                iterWeight += 0.5
+
+
+                let chkSelected = document.getElementById('selected' + i)
+                if (chkSelected.checked)
+                    resultTxts.push(`${valueNames[i]} : ${v}`)
+            }
+
+            let tbResult = document.getElementById('resultGap')
+            let gap = values[0] - values[2];
+            gapPer = (((max - values[2]) / max) - ((max - values[0]) / max)) * 100;
+            tbResult.value = `${gapPer.toFixed(2)}%(빨주),\t차이값 : ${gap}`
+
+
+            resultTxts.unshift(gapPer.toFixed(2) + '%')
+
+            let txtResult = document.getElementById('txtResult');
+            let text = resultTxts.join('\n')
+            txtResult.value = text
+            txtResult.select()
+        }
+    </script>
+
+{% endblock %}

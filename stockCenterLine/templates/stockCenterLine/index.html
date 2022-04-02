@@ -1,0 +1,64 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+{% load bootstrap4 %}
+
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>CL 계산기</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <link rel="stylesheet" href="{% static 'stockCenterLine/css/mystyle.css' %}">
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+    <script src="{% static 'stockCenterLine/js/scripts.js' %}"></script>
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" id="linkMain" href="{% url 'stockCenterLine:clcalc' %}">CL 계산기</a>
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                {% if user.is_authenticated %}
+                    <form id="frmLogout" action="{% url 'stockCenterLine:logout' %}" method="POST">
+                        {% csrf_token %}
+                        <a class="nav-link active" type="submit" aria-current='page' id="gnbLogout"
+                           onclick="onLogout();">로그아웃</a>
+                    </form>
+                {% else %}
+                    <a class="nav-link active" aria-current='page' id="gnbLogin"
+                       href="{% url 'stockCenterLine:login' %}">로그인</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page content-->
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<div class="card-footer">
+    <div class="text-center">
+        서버 비용 후원 계좌 : 토스뱅크 1000-0681-7154 김동영<br>Copyright@주식차트연구소 - 토리한이
+    </div>
+</div>
+
+
+</body>
+</html>
+
+<script>
+    function onLogout(e) {
+        document.getElementById('frmLogout').submit();
+    }
+</script>
