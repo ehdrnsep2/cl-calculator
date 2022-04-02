@@ -15,7 +15,7 @@ Link : https://ehdrnsep.cafe24.com/stockcenterline
    
    
    
-## 화면 개발 Html, Bootstrap, Javascript, JQuery
+## 프론트엔드 개발 Html, Bootstrap, Javascript, JQuery
  - 해당 웹은 주로 모바일에서 사용되므로, 반응형 웹을 위해 Bootstrap을 사용하였습니다.
  - 파이참으로 Django 프로젝트 생성 후 DB 모델링 안하고 Html부터 작성하였습니다.
  - CSS는 날 잡고 학습해야되겠다는 생각이 들었습니다. Checkbox Size 키우느냐고 쓴게 다네요..
@@ -32,7 +32,7 @@ Link : https://ehdrnsep.cafe24.com/stockcenterline
 
 ***
 
-## 서버 개발 Django, Python, Mysql
+##  개발 Django, Python, Mysql
  - 화면을 만들고, DB 모델링하고 연동하려니 후회가 들었습니다. Django의 ModelForm을 활용하지 못해서 아쉬웠고, 설정값 저장을 POST로 직접 처리했는데 이게 맞나 싶었습니다.
 ```python
 class CenterLineCalc(generic.View):
