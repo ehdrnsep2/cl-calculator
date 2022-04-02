@@ -18,7 +18,7 @@ Link : https://ehdrnsep.cafe24.com/stockcenterline
 ## 프론트엔드 개발 Html, Bootstrap, Javascript, JQuery
  - 해당 웹은 주로 모바일에서 사용되므로, 반응형 웹을 위해 Bootstrap을 사용하였습니다.
  - 파이참으로 Django 프로젝트 생성 후 DB 모델링 안하고 Html부터 작성하였습니다.
- - CSS는 날 잡고 학습해야되겠다는 생각이 들었습니다. Checkbox Size 키우느냐고 쓴게 다네요..
+ - CSS는 어렵게만 느껴져서 날 잡고 학습해야되겠다는 생각이 들었습니다. Checkbox Size 키우느냐고 쓴게 다네요..퍼블리셔님들 존경합니다..
  ```css
  input[type=checkbox] {
     transform: scale(1.5);
