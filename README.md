@@ -32,7 +32,7 @@ Link : https://ehdrnsep.cafe24.com/stockcenterline
 
 ***
 
-##  개발 Django, Python, Mysql
+##  백엔드 개발 Django, Python, Mysql
  - 화면을 만들고, DB 모델링하고 연동하려니 후회가 들었습니다. Django의 ModelForm을 활용하지 못해서 아쉬웠고, 설정값 저장을 POST로 직접 처리했는데 이게 맞나 싶었습니다.
 ```python
 class CenterLineCalc(generic.View):
