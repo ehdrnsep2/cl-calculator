@@ -15,7 +15,7 @@ Link : https://ehdrnsep.cafe24.com/stockcenterline
 - 개발기간 : 2022년 3월 27일 ~ 4월 2일 (7일)   
 - 학습스펙 : [파이썬 2일](https://wikidocs.net/43), 파이참 자체 튜토리얼 1일, [Django 튜토리얼 2일](https://docs.djangoproject.com/ko/4.0/intro/tutorial01/)   
            (웹 개발 초보이니 감안하고 봐주세요..^^;)
-
+- 개발툴 : PyCharm 2021.3.3 (Professional Edition) 체험판
 - 개발일지 : 아래에 간단하게 개발을 하며 느낀점을 작성하겠습니다.   
    
    
