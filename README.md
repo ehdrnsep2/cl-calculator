@@ -11,9 +11,9 @@ Link : https://ehdrnsep.cafe24.com/stockcenterline
 
 ***
 
-개발목적 : Django를 이용한 간단한 웹개발 학습   
-개발기간 : 2022년 3월 27일 ~ 4월 2일 (7일..ㅠㅠ결과물을 보면 자괴감이...)   
-학습스펙 : 파이썬 2일, 파이참 1일, Django 2일(쓰레기 코드 이해 부탁드려요...)   
+개발목적 : Django를 이용한 간단한 웹 개발 및 배포   
+개발기간 : 2022년 3월 27일 ~ 4월 2일 (7일)   
+학습스펙 : [파이썬 2일](https://wikidocs.net/43), 파이참 자체 튜토리얼 1일, [Django 튜토리얼 2일](https://docs.djangoproject.com/ko/4.0/intro/tutorial01/)(쓰레기 코드 이해 부탁드려요...)   
 개발일지 : 아래에 간단하게 개발을 하며 느낀점을 작성하겠습니다.   
    
    
